@@ -15,11 +15,6 @@ if platform.system() == "Darwin" and platform.machine() == "arm64":
     if not launch.is_installed("pyvirtualcam"):
         launch.run_pip("install git+https://github.com/letmaik/pyvirtualcam", "requirements for Ebsynth Utility")
 
-if not launch.is_installed("transparent_background"):
-    launch.run_pip("install transparent-background", "requirements for Ebsynth Utility")
-
-update_transparent_background()
-
 if not launch.is_installed("IPython"):
     launch.run_pip("install ipython", "requirements for Ebsynth Utility")
 
