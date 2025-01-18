@@ -4,10 +4,6 @@ import platform
 def update_transparent_background():
     from importlib.metadata import version as meta_version
     from packaging import version
-    v = meta_version("transparent-background")
-    print("current transparent-background " + v)
-    if version.parse(v) < version.parse('1.2.3'):
-        launch.run_pip("install -U transparent-background", "update transparent-background version for Ebsynth Utility")
 
 # Check if user is running an M1/M2 device and, if so, install pyvirtualcam, which is required for updating the transparent_background package
 # Note that we have to directly install from source because the prebuilt PyPl wheel does not support ARM64 machines such as M1/M2 Macs
