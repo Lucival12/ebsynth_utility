@@ -156,11 +156,6 @@ def create_mask_transparent_background(input_dir, output_dir, tb_use_fast_mode, 
         base_name = os.path.basename(m)
         pbar_original_imgs.set_description('{}'.format(base_name))
         img = Image.open(m).convert('RGB')
-        
-        if isinstance(out,Image.Image):
-            out = np.array(out)
-        out[out < int( 255 * st1_mask_threshold )] = 0
-        cv2.imwrite(os.path.join(output_dir, base_name), out)
 
 
 def ebsynth_utility_stage1(dbg, project_args, frame_width, frame_height, st1_masking_method_index, st1_mask_threshold, tb_use_fast_mode, tb_use_jit, clipseg_mask_prompt, clipseg_exclude_prompt, clipseg_mask_threshold, clipseg_mask_blur_size, clipseg_mask_blur_size2, is_invert_mask):
