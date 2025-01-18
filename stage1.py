@@ -6,7 +6,6 @@ import re
 
 from transformers import AutoProcessor, CLIPSegForImageSegmentation
 from PIL import Image
-from transparent_background import Remover
 from tqdm.auto import tqdm
 import torch
 import numpy as np
@@ -148,8 +147,7 @@ def create_mask_clipseg(input_dir, output_dir, clipseg_mask_prompt, clipseg_excl
 
 def create_mask_transparent_background(input_dir, output_dir, tb_use_fast_mode, tb_use_jit, st1_mask_threshold):
     from modules import devices
-    mode='fast' if tb_use_fast_mode else 'base'
-    remover = Remover(mode=mode, jit=tb_use_jit, device=devices.get_optimal_device_name())
+    
 
     original_imgs = glob.glob( os.path.join(input_dir, "*.png") )
 
@@ -158,7 +156,7 @@ def create_mask_transparent_background(input_dir, output_dir, tb_use_fast_mode, 
         base_name = os.path.basename(m)
         pbar_original_imgs.set_description('{}'.format(base_name))
         img = Image.open(m).convert('RGB')
-        out = remover.process(img, type='map')
+        
         if isinstance(out,Image.Image):
             out = np.array(out)
         out[out < int( 255 * st1_mask_threshold )] = 0
